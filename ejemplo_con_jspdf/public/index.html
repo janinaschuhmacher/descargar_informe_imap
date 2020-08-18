@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel="shortcut icon" href="">
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+  <div id="content">
+    <h3>Ejemplo</h3>
+
+   <p>este texto saldrá en el pdf</p>
+   <br>
+   <img id="my-image" src="space_capsule_landing.jpeg" width="300"> 
+   <br>
+</div>
+<br>
+<div id="not for printing">este no saldrá</div>
+<br>
+<button id="cmd">Descargar pdf</button>
+
+</body>
+
+<script>
+$(document).ready(function() {
+  $("#cmd").click(function() {
+
+    var doc = new jsPDF('p', 'pt', 'a4', true);
+
+    doc.fromHTML($('#content').get(0), 15, 15, {
+      'width': 500
+    },
+    function(){
+        doc.save('test.pdf');
+    });
+  });
+})
+
+/*  var img = new Image();
+  img.src = 'space_capsule_landing.jpeg';
+      
+  var doc = new jsPDF();
+  var specialElementHandlers = {
+      '#content': function (element, renderer) {
+  return true;
+  }
+};
+
+  $('#cmd').click(function () {
+  doc.fromHTML($('#content').html(), 15, 15, {
+      'width': 170,
+      'elementHandlers': specialElementHandlers
+});
+
+doc.addImage(img, 'JPEG', 15, 40, 180, 160);
+
+doc.save('sample-file.pdf');
+}); */
+</script>
+
+
+</html>
